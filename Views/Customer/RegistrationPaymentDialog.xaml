@@ -1,0 +1,153 @@
+<Window x:Class="SportCenterApp.Views.Customer.RegistrationPaymentDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Đăng Ký &amp; Thanh Toán Khóa Học" 
+        Height="680" Width="640"
+        WindowStartupLocation="CenterOwner"
+        Background="#FFFFFF"
+        ResizeMode="NoResize">
+
+    <Border Padding="30">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <!-- Header -->
+            <StackPanel Grid.Row="0" Margin="0,0,0,20">
+                <TextBlock Text="💳 Đăng Ký &amp; Thanh Toán Khóa Học" FontSize="20" FontWeight="Bold" Foreground="{StaticResource TextPrimaryBrush}" />
+                <TextBlock Text="Xác nhận thông tin lớp học và lựa chọn phương thức thanh toán" FontSize="12" Foreground="{StaticResource TextSecondaryBrush}" Margin="0,4,0,0" />
+            </StackPanel>
+
+            <!-- Body -->
+            <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+                <StackPanel>
+                    <!-- Order Summary Card -->
+                    <Border Background="#F8FAFC" BorderBrush="{StaticResource BorderSubtleBrush}" BorderThickness="1" CornerRadius="8" Padding="18" Margin="0,0,0,16">
+                        <StackPanel>
+                            <TextBlock Text="THÔNG TIN KHÓA HỌC" FontSize="11" FontWeight="Bold" Foreground="{StaticResource TealAccentBrush}" Margin="0,0,0,12" />
+
+                            <Grid Margin="0,0,0,8">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="130" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Column="0" Text="Tên lớp học:" Foreground="{StaticResource TextSecondaryBrush}" />
+                                <TextBlock x:Name="TxtClassName" Grid.Column="1" Text="Demo Badminton Class" FontWeight="Bold" Foreground="{StaticResource TextPrimaryBrush}" />
+                            </Grid>
+
+                            <Grid Margin="0,0,0,8">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="130" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Column="0" Text="Môn thể thao:" Foreground="{StaticResource TextSecondaryBrush}" />
+                                <TextBlock x:Name="TxtSportCourse" Grid.Column="1" Text="Cầu lông • Badminton Foundations" FontWeight="SemiBold" Foreground="#2563EB" />
+                            </Grid>
+
+                            <Grid Margin="0,0,0,8">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="130" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Column="0" Text="HLV phụ trách:" Foreground="{StaticResource TextSecondaryBrush}" />
+                                <TextBlock x:Name="TxtCoachName" Grid.Column="1" Text="Jordan Lee" FontWeight="Bold" Foreground="{StaticResource TextPrimaryBrush}" />
+                            </Grid>
+
+                            <Grid Margin="0,0,0,8">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="130" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Column="0" Text="Thời gian học:" Foreground="{StaticResource TextSecondaryBrush}" />
+                                <TextBlock x:Name="TxtSchedule" Grid.Column="1" Text="15/11/2026 - 15/12/2026" Foreground="{StaticResource TextSecondaryBrush}" />
+                            </Grid>
+
+                            <Separator Background="{StaticResource BorderSubtleBrush}" Margin="0,8,0,10" />
+
+                            <!-- Price Breakdown -->
+                            <Grid Margin="0,0,0,4">
+                                <TextBlock Text="Học phí gốc:" Foreground="{StaticResource TextSecondaryBrush}" />
+                                <TextBlock x:Name="TxtOriginalPrice" Text="250,000 đ" HorizontalAlignment="Right" Foreground="{StaticResource TextSecondaryBrush}" />
+                            </Grid>
+
+                            <Grid Margin="0,0,0,6">
+                                <TextBlock Text="Ưu đãi thể thao:" Foreground="{StaticResource TextSecondaryBrush}" />
+                                <TextBlock Text="- 0 đ" HorizontalAlignment="Right" Foreground="#059669" FontWeight="SemiBold" />
+                            </Grid>
+
+                            <Grid Margin="0,4,0,0">
+                                <TextBlock Text="TỔNG TIỀN PHẢI TRẢ:" FontWeight="Bold" FontSize="14" Foreground="{StaticResource TextPrimaryBrush}" />
+                                <TextBlock x:Name="TxtFinalPrice" Text="250,000 đ" FontWeight="Bold" FontSize="18" Foreground="{StaticResource SuccessBrush}" HorizontalAlignment="Right" />
+                            </Grid>
+                        </StackPanel>
+                    </Border>
+
+                    <!-- Payment Method Picker -->
+                    <Border Background="#F8FAFC" BorderBrush="{StaticResource BorderSubtleBrush}" BorderThickness="1" CornerRadius="8" Padding="18" Margin="0,0,0,16">
+                        <StackPanel>
+                            <TextBlock Text="PHƯƠNG THỨC THANH TOÁN (MỨC CƠ BẢN)" FontSize="11" FontWeight="Bold" Foreground="{StaticResource TealAccentBrush}" Margin="0,0,0,12" />
+
+                            <RadioButton x:Name="RbOnline" GroupName="PayMethod" IsChecked="True" Margin="0,0,0,12" Checked="OnPaymentMethodChanged">
+                                <StackPanel Margin="6,0,0,0">
+                                    <TextBlock Text="💳 Thanh toán Trực tuyến (Thẻ ATM / Visa / Master)" FontWeight="Bold" Foreground="{StaticResource TextPrimaryBrush}" />
+                                    <TextBlock Text="Cổng thanh toán tự động, kích hoạt lớp học ngay lập tức" FontSize="11" Foreground="{StaticResource TextSecondaryBrush}" />
+                                </StackPanel>
+                            </RadioButton>
+
+                            <RadioButton x:Name="RbQr" GroupName="PayMethod" Margin="0,0,0,12" Checked="OnPaymentMethodChanged">
+                                <StackPanel Margin="6,0,0,0">
+                                    <TextBlock Text="📱 Quét mã QR (VNPay / MoMo mô phỏng)" FontWeight="Bold" Foreground="{StaticResource TextPrimaryBrush}" />
+                                    <TextBlock Text="Quét mã QR chuyển khoản ngân hàng nhanh 24/7" FontSize="11" Foreground="{StaticResource TextSecondaryBrush}" />
+                                </StackPanel>
+                            </RadioButton>
+
+                            <RadioButton x:Name="RbCounter" GroupName="PayMethod" Checked="OnPaymentMethodChanged">
+                                <StackPanel Margin="6,0,0,0">
+                                    <TextBlock Text="🏢 Thanh toán tiền mặt tại quầy lễ tân" FontWeight="Bold" Foreground="{StaticResource TextPrimaryBrush}" />
+                                    <TextBlock Text="Đóng phí trực tiếp tại quầy Sport Center trước buổi học đầu tiên" FontSize="11" Foreground="{StaticResource TextSecondaryBrush}" />
+                                </StackPanel>
+                            </RadioButton>
+
+                            <!-- QR Code Preview Box -->
+                            <Border x:Name="BorderQrBox" Background="#FFFFFF" CornerRadius="6" Padding="12" Margin="0,14,0,0" BorderBrush="{StaticResource BorderSubtleBrush}" BorderThickness="1" Visibility="Collapsed">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="100" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <!-- Mock QR Visual -->
+                                    <Border Grid.Column="0" Width="85" Height="85" Background="#FFFFFF" BorderBrush="#CBD5E1" BorderThickness="1" CornerRadius="4" Padding="6">
+                                        <TextBlock Text="⬛ QR ⬛&#x0a;SPORT&#x0a;CENTER&#x0a;⬛ PAY ⬛" FontSize="9" FontWeight="Bold" Foreground="#0F172A" TextAlignment="Center" VerticalAlignment="Center" />
+                                    </Border>
+
+                                    <StackPanel Grid.Column="1" VerticalAlignment="Center" Margin="12,0,0,0">
+                                        <TextBlock Text="Ngân hàng MB Bank (Sport Center)" FontWeight="Bold" Foreground="{StaticResource TextPrimaryBrush}" />
+                                        <TextBlock Text="STK: 888899990001" Foreground="#2563EB" FontWeight="Bold" Margin="0,2,0,0" />
+                                        <TextBlock Text="Nội dung: DANGKY KHOAHOC" FontSize="11" Foreground="{StaticResource TextSecondaryBrush}" Margin="0,2,0,0" />
+                                    </StackPanel>
+                                </Grid>
+                            </Border>
+                        </StackPanel>
+                    </Border>
+
+                    <!-- Note -->
+                    <TextBlock Text="Ghi chú thêm (tùy chọn)" FontSize="12" Foreground="{StaticResource TextSecondaryBrush}" Margin="0,0,0,6" />
+                    <TextBox x:Name="TxtNote" Height="36" VerticalContentAlignment="Center" Margin="0,0,0,12" />
+
+                    <!-- Error Text -->
+                    <TextBlock x:Name="TxtError" Foreground="#DC2626" FontSize="12" TextWrapping="Wrap" Margin="0,0,0,8" Visibility="Collapsed" />
+                </StackPanel>
+            </ScrollViewer>
+
+            <!-- Actions Footer -->
+            <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,15,0,0">
+                <Button Content="Quay lại" Style="{StaticResource OutlineButtonStyle}" Width="100" Margin="0,0,10,0" Click="OnCancelClick" />
+                <Button x:Name="BtnConfirmPay" Content="✅ Xác nhận Thanh toán &amp; Đăng ký" Style="{StaticResource SuccessButtonStyle}" Height="40" Padding="18,0" Click="OnConfirmPayClick" />
+            </StackPanel>
+        </Grid>
+    </Border>
+</Window>

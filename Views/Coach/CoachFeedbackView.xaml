@@ -1,0 +1,87 @@
+<UserControl x:Class="SportCenterApp.Views.Coach.CoachFeedbackView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             Background="{StaticResource BgDarkBrush}">
+    <Grid Margin="24">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <!-- Header (White Card) -->
+        <Border Grid.Row="0" Background="#FFFFFF" BorderBrush="{StaticResource BorderSubtleBrush}" BorderThickness="1" CornerRadius="8" Padding="20,16" Margin="0,0,0,20">
+            <Border.Effect>
+                <DropShadowEffect BlurRadius="6" Direction="270" Opacity="0.04" ShadowDepth="2" Color="Black" />
+            </Border.Effect>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Grid.Column="0">
+                    <TextBlock Text="💬 Đánh Giá Của Học Viên Dành Cho Bạn" FontSize="20" FontWeight="Bold" Foreground="{StaticResource TextPrimaryBrush}" />
+                    <TextBlock Text="Xem phản hồi, nhận xét và điểm số sao học viên gửi sau các khóa học" FontSize="12" Foreground="{StaticResource TextSecondaryBrush}" Margin="0,4,0,0" />
+                </StackPanel>
+
+                <Button Grid.Column="1" Content="🔄 Tải lại" Style="{StaticResource OutlineButtonStyle}" VerticalAlignment="Center" Click="OnRefreshClick" />
+            </Grid>
+        </Border>
+
+        <!-- Feedbacks List -->
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+            <StackPanel>
+                <ItemsControl x:Name="IcCoachFeedbacks">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Border Background="#FFFFFF" BorderBrush="{StaticResource BorderSubtleBrush}" BorderThickness="1" CornerRadius="8" Padding="18" Margin="0,0,0,14">
+                                <Border.Effect>
+                                    <DropShadowEffect BlurRadius="6" Direction="270" Opacity="0.04" ShadowDepth="2" Color="Black" />
+                                </Border.Effect>
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+
+                                    <!-- Top Row: Student & Class info + Rating -->
+                                    <Grid Grid.Row="0" Margin="0,0,0,10">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="Auto" />
+                                        </Grid.ColumnDefinitions>
+
+                                        <StackPanel Grid.Column="0">
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="{Binding MemberName}" FontSize="15" FontWeight="Bold" Foreground="{StaticResource TextPrimaryBrush}" Margin="0,0,8,0" />
+                                                <TextBlock Text="{Binding MemberEmail, StringFormat='({0})'}" FontSize="12" Foreground="{StaticResource TextSecondaryBrush}" VerticalAlignment="Center" />
+                                            </StackPanel>
+                                            <StackPanel Orientation="Horizontal" Margin="0,4,0,0">
+                                                <TextBlock Text="Lớp: " FontSize="12" Foreground="{StaticResource TextSecondaryBrush}" />
+                                                <TextBlock Text="{Binding ClassName}" FontSize="12" FontWeight="SemiBold" Foreground="{StaticResource TealAccentBrush}" Margin="0,0,8,0" />
+                                                <TextBlock Text="• Môn: " FontSize="12" Foreground="{StaticResource TextSecondaryBrush}" />
+                                                <TextBlock Text="{Binding SportName}" FontSize="12" FontWeight="SemiBold" Foreground="#2563EB" />
+                                            </StackPanel>
+                                        </StackPanel>
+
+                                        <StackPanel Grid.Column="1" HorizontalAlignment="Right">
+                                            <TextBlock Text="{Binding RatingStars}" FontSize="16" Foreground="#D97706" HorizontalAlignment="Right" />
+                                            <TextBlock Text="{Binding CreatedAtFormatted}" FontSize="11" Foreground="#64748B" HorizontalAlignment="Right" Margin="0,2,0,0" />
+                                        </StackPanel>
+                                    </Grid>
+
+                                    <!-- Comment Text -->
+                                    <Border Grid.Row="1" Background="#F8FAFC" CornerRadius="6" Padding="14,10" BorderBrush="{StaticResource BorderSubtleBrush}" BorderThickness="1">
+                                        <TextBlock Text="{Binding Comment}" Foreground="{StaticResource TextPrimaryBrush}" FontSize="13" TextWrapping="Wrap" />
+                                    </Border>
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+
+                <TextBlock x:Name="TxtNoFeedback" Text="Chưa có học viên nào gửi đánh giá cho các lớp của bạn." FontSize="14" Foreground="{StaticResource TextSecondaryBrush}" HorizontalAlignment="Center" Margin="0,40,0,0" Visibility="Collapsed" />
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</UserControl>

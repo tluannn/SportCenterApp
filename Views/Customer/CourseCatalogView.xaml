@@ -1,0 +1,133 @@
+<UserControl x:Class="SportCenterApp.Views.Customer.CourseCatalogView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             Background="{StaticResource BgDarkBrush}">
+    <Grid Margin="24">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <!-- Top Banner (White Card) -->
+        <Border Grid.Row="0" Background="#FFFFFF" BorderBrush="{StaticResource BorderSubtleBrush}" BorderThickness="1" CornerRadius="10" Padding="24,20" Margin="0,0,0,20">
+            <Border.Effect>
+                <DropShadowEffect BlurRadius="8" Direction="270" Opacity="0.04" ShadowDepth="2" Color="Black" />
+            </Border.Effect>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Grid.Column="0">
+                    <TextBlock Text="🏃 Danh Mục Khóa Học &amp; Đặt Lớp Thể Thao" FontSize="20" FontWeight="Bold" Foreground="{StaticResource TextPrimaryBrush}" />
+                    <TextBlock Text="Chọn lớp học phù hợp với trình độ, đăng ký và thanh toán online nhanh chóng để bắt đầu luyện tập!" FontSize="12" Foreground="{StaticResource TextSecondaryBrush}" Margin="0,4,0,0" />
+                </StackPanel>
+
+                <Button Grid.Column="1" Content="🔄 Tải lại" Style="{StaticResource OutlineButtonStyle}" VerticalAlignment="Center" Click="OnRefreshClick" />
+            </Grid>
+        </Border>
+
+        <!-- Filters Bar (White Card) -->
+        <Border Grid.Row="1" Background="#FFFFFF" BorderBrush="{StaticResource BorderSubtleBrush}" BorderThickness="1" CornerRadius="8" Padding="16,12" Margin="0,0,0,16">
+            <Border.Effect>
+                <DropShadowEffect BlurRadius="8" Direction="270" Opacity="0.04" ShadowDepth="2" Color="Black" />
+            </Border.Effect>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="320" />
+                    <ColumnDefinition Width="20" />
+                    <ColumnDefinition Width="220" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <!-- Search -->
+                <Grid Grid.Column="0">
+                    <TextBox x:Name="TxtSearch" Height="36" VerticalContentAlignment="Center" TextChanged="OnSearchTextChanged" />
+                    <TextBlock x:Name="TxtSearchPlaceholder" Text="🔍 Tìm theo tên lớp, môn, HLV..." Foreground="#94A3B8" IsHitTestVisible="False" VerticalAlignment="Center" Margin="12,0,0,0" />
+                </Grid>
+
+                <!-- Sport Filter -->
+                <ComboBox x:Name="CmbSportFilter" Grid.Column="2" Height="36" SelectionChanged="OnSportFilterChanged">
+                    <ComboBoxItem Content="Tất cả môn thể thao" IsSelected="True" />
+                </ComboBox>
+            </Grid>
+        </Border>
+
+        <!-- Course Cards List -->
+        <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Auto">
+            <ItemsControl x:Name="IcClasses">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Border Background="#FFFFFF" BorderBrush="{StaticResource BorderSubtleBrush}" BorderThickness="1" CornerRadius="10" Padding="20" Margin="0,0,0,16">
+                            <Border.Effect>
+                                <DropShadowEffect BlurRadius="8" Direction="270" Opacity="0.05" ShadowDepth="2" Color="Black" />
+                            </Border.Effect>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="230" />
+                                </Grid.ColumnDefinitions>
+
+                                <!-- Left Details -->
+                                <StackPanel Grid.Column="0" Margin="0,0,20,0">
+                                    <StackPanel Orientation="Horizontal" Margin="0,0,0,8">
+                                        <Border Background="#E0F2FE" BorderBrush="#BAE6FD" BorderThickness="1" CornerRadius="4" Padding="8,3" Margin="0,0,8,0">
+                                            <TextBlock Text="{Binding SportName}" FontSize="11" FontWeight="Bold" Foreground="#0369A1" />
+                                        </Border>
+                                        <Border Background="#EFF6FF" BorderBrush="#BFDBFE" BorderThickness="1" CornerRadius="4" Padding="8,3">
+                                            <TextBlock Text="{Binding OfferingName}" FontSize="11" FontWeight="SemiBold" Foreground="#1D4ED8" />
+                                        </Border>
+                                    </StackPanel>
+
+                                    <TextBlock Text="{Binding ClassName}" FontSize="18" FontWeight="Bold" Foreground="{StaticResource TextPrimaryBrush}" Margin="0,0,0,6" />
+                                    <TextBlock Text="{Binding CourseName}" FontSize="13" Foreground="{StaticResource TealAccentBrush}" FontWeight="SemiBold" Margin="0,0,0,10" />
+
+                                    <!-- Coach info row -->
+                                    <Border Background="#F8FAFC" CornerRadius="6" Padding="12,8" Margin="0,0,0,10" BorderBrush="{StaticResource BorderSubtleBrush}" BorderThickness="1">
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="🥋 Huấn luyện viên:" FontWeight="SemiBold" Foreground="{StaticResource TextSecondaryBrush}" Margin="0,0,8,0" />
+                                            <TextBlock Text="{Binding CoachName}" FontWeight="Bold" Foreground="{StaticResource TextPrimaryBrush}" Margin="0,0,12,0" />
+                                            <TextBlock Text="{Binding CoachBio}" FontSize="11" Foreground="{StaticResource TextSecondaryBrush}" FontStyle="Italic" VerticalAlignment="Center" TextTrimming="CharacterEllipsis" MaxWidth="350" />
+                                        </StackPanel>
+                                    </Border>
+
+                                    <!-- Schedule info -->
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="📅 Thời gian:" Foreground="{StaticResource TextSecondaryBrush}" Margin="0,0,6,0" />
+                                        <TextBlock Text="{Binding DateRangeDisplay}" Foreground="{StaticResource TextPrimaryBrush}" FontWeight="Bold" Margin="0,0,16,0" />
+                                        <TextBlock Text="⏳ Số buổi:" Foreground="{StaticResource TextSecondaryBrush}" Margin="0,0,6,0" />
+                                        <TextBlock Text="{Binding TotalSessions, StringFormat='{}{0} buổi'}" Foreground="{StaticResource TextPrimaryBrush}" FontWeight="Bold" Margin="0,0,16,0" />
+                                        <TextBlock Text="{Binding RatingDisplay}" Foreground="#D97706" FontWeight="Bold" />
+                                    </StackPanel>
+                                </StackPanel>
+
+                                <!-- Right Pricing & Action -->
+                                <Border Grid.Column="1" Background="#F8FAFC" CornerRadius="8" Padding="16" BorderBrush="{StaticResource BorderSubtleBrush}" BorderThickness="1" VerticalAlignment="Center">
+                                    <StackPanel HorizontalAlignment="Center">
+                                        <TextBlock Text="HỌC PHÍ TOÀN KHÓA" FontSize="11" FontWeight="Bold" Foreground="{StaticResource TextSecondaryBrush}" HorizontalAlignment="Center" />
+                                        <TextBlock Text="{Binding PriceFormatted}" FontSize="18" FontWeight="Bold" Foreground="{StaticResource SuccessBrush}" HorizontalAlignment="Center" Margin="0,4,0,8" />
+
+                                        <!-- Slots Badge -->
+                                        <Border CornerRadius="12" Padding="8,4" HorizontalAlignment="Center" Margin="0,0,0,14" Background="#FFFFFF" BorderBrush="{StaticResource BorderSubtleBrush}" BorderThickness="1">
+                                            <TextBlock Text="{Binding SlotDisplay}" FontSize="11" FontWeight="SemiBold" Foreground="{StaticResource TextPrimaryBrush}" />
+                                        </Border>
+
+                                        <!-- Enroll & Pay Button -->
+                                        <Button Content="⚡ Đăng Ký &amp; Thanh Toán" 
+                                                Style="{StaticResource PrimaryButtonStyle}" 
+                                                Height="38" 
+                                                Width="190" 
+                                                Tag="{Binding}" 
+                                                Click="OnRegisterClassClick" />
+                                    </StackPanel>
+                                </Border>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+    </Grid>
+</UserControl>
